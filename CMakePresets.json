@@ -101,7 +101,7 @@
                 "ENABLE_UART_RW_BK_REGS": false,
                 "ENABLE_SWD": false,
                 "VERSION_STRING_1": "v0.22",
-                "VERSION_STRING_2": "v6.3.0"
+                "VERSION_STRING_2": "v1"
             }
         },
         {
@@ -111,7 +111,7 @@
                 "ENABLE_FEAT_F4HWN_QRCODE": true,
                 "ENABLE_FEAT_F4HWN_MEM": true,
                 "EDITION_STRING": "Custom",
-                "TARGET": "f4hwn.custom"
+                "TARGET": "dikiy_.custom"
             }
         },
         {
