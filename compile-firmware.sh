@@ -183,7 +183,7 @@ build_preset() {
     return "$status"
   fi
 
-  bin_file="build/${preset}/f4hwn.${preset_slug}.bin"
+  bin_file="build/${preset}/dikiy_.${preset_slug}.bin"
   if [[ -z "$bin_file" || ! -f "$bin_file" ]]; then
     if (( QUIET )); then
       printf "❌ FAILED\n"

@@ -1285,7 +1285,7 @@ void SETTINGS_SaveChannel(uint16_t Channel, uint8_t VFO, const VFO_Info_t *pVFO,
         if (IS_MR_CHANNEL(Channel)) {
 #ifndef ENABLE_KEEP_MEM_NAME
             // clear/reset the channel name
-            SETTINGS_SaveChannelName(Channel, "");
+            if (Mode >= 3) SETTINGS_SaveChannelName(Channel, "");
 #else
             if (Mode >= 3) {
                 SETTINGS_SaveChannelName(Channel, pVFO->Name);

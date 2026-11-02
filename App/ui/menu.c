@@ -138,7 +138,6 @@ const t_menu_item MenuList[] =
     {"RxMode",      MENU_TDR           },
     {"Sql",         MENU_SQL           },
 #ifdef ENABLE_FEAT_F4HWN
-    {"SetPwr",      MENU_SET_PWR       },
     {"SetPTT",      MENU_SET_PTT       },
     {"SetTOT",      MENU_SET_TOT       },
     {"SetEOT",      MENU_SET_EOT       },
@@ -203,14 +202,7 @@ const uint8_t FIRST_HIDDEN_MENU_ITEM = MENU_F_LOCK;
 
 const char* const gSubMenu_TXP[] =
 {
-    "USER",
-    "LOW 1",
-    "LOW 2",
-    "LOW 3",
-    "LOW 4",
-    "LOW 5",
-    "MID",
-    "HIGH"
+	"LOW", "MID", "HIGH"
 };
 
 const char* const gSubMenu_SFT_D[] =
@@ -582,7 +574,7 @@ const char *const CategoryNames[CAT_COUNT] = {
 // references (sinon build KO, ex. preset Custom). Les autres MENU_SET_* sont
 // sous ENABLE_FEAT_F4HWN, garanti par la dependance CMake (App/CMakeLists.txt).
 static const uint8_t CatChannels[] = {
-    MENU_STEP, MENU_TXP, MENU_SET_PWR, MENU_R_DCS, MENU_R_CTCS, MENU_T_DCS,
+    MENU_STEP, MENU_TXP, MENU_R_DCS, MENU_R_CTCS, MENU_T_DCS,
     MENU_T_CTCS, MENU_SFT_D, MENU_OFFSET, MENU_W_N,
 #ifdef ENABLE_FEAT_F4HWN_NARROWER
     MENU_SET_NFM,
@@ -1076,24 +1068,21 @@ void UI_DisplayMenu(void)
             break;
         }
 
-        case MENU_TXP:
-#ifdef ENABLE_FEAT_F4HWN
-        case MENU_SET_PWR:
-#endif
-        {
-            int32_t power = gSubMenuSelection;
-#ifdef ENABLE_FEAT_F4HWN
-            if (m == MENU_SET_PWR)
-                power++;
-#endif
-            if (power == 0)
-            {
-                choiceTable = gSubMenu_TXP;
-                goto copy_menu_choice;
-            }
-            sprintf(String, "%s\n%sW", gSubMenu_TXP[power], gSubMenu_SET_PWR[power - 1]);
-            break;
-        }
+case MENU_TXP:
+		{
+			uint8_t pwrVal = OUTPUT_POWER_LOW4;
+
+			if (gSubMenuSelection == 1)
+				pwrVal = OUTPUT_POWER_MID;
+			else if (gSubMenuSelection == 2)
+				pwrVal = OUTPUT_POWER_HIGH;
+
+			if (gSubMenuSelection < 0 || gSubMenuSelection > 2)
+				gSubMenuSelection = 0;
+
+			sprintf(String, "%s\n%sW", gSubMenu_TXP[gSubMenuSelection], gSubMenu_SET_PWR[pwrVal - 1]);
+			break;
+		}
 
         case MENU_R_DCS:
         case MENU_T_DCS:

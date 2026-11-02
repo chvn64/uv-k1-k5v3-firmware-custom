@@ -580,8 +580,9 @@ void MENU_AcceptSetting(void)
             return;
 
         case MENU_TXP:
-            gTxVfo->OUTPUT_POWER = gSubMenuSelection;
-            gRequestSaveChannel = 1;
+            gTxVfo->OUTPUT_POWER = gSubMenuSelection == 1 ? OUTPUT_POWER_MID :
+            	gSubMenuSelection == 2 ? OUTPUT_POWER_HIGH : OUTPUT_POWER_LOW4;
+            gRequestSaveChannel = 2;
             return;
 
         case MENU_T_DCS:
@@ -1031,7 +1032,8 @@ void MENU_ShowCurrentSetting(void)
             break;
 
         case MENU_TXP:
-            gSubMenuSelection = gTxVfo->OUTPUT_POWER;
+            gSubMenuSelection = gTxVfo->OUTPUT_POWER == OUTPUT_POWER_MID ? 1 :
+            	gTxVfo->OUTPUT_POWER == OUTPUT_POWER_HIGH ? 2 : 0;
             break;
 
         case MENU_RESET:
