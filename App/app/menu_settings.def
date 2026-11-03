@@ -57,6 +57,6 @@ MENU_SETTING(MENU_SET_VOL, gEeprom.VOLUME_GAIN, 0, 63)
 MENU_SETTING(MENU_SET_TMR, gSetting_set_tmr, 0, ARRAY_SIZE(gSubMenu_OFF_ON) - 1)
 #endif
 #if defined(ENABLE_FEAT_F4HWN) && defined(ENABLE_FEAT_F4HWN_LOGO_SAV)
-MENU_SETTING(MENU_SET_SAV, gSetting_set_sav, 0, SET_SAV_LEN - 1)
+MENU_SETTING(MENU_SET_SAV, gSetting_set_sav, 0, SET_SAV_LOGO)
 #endif
 

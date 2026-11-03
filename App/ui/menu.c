@@ -295,8 +295,6 @@ const char* const gSubMenu_SET_SAV[] =
 {
     "OFF",
     "LOGO",
-    "LOGO+",
-    "MATRIX"
 };
 #endif
 
