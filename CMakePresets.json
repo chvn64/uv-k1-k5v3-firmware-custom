@@ -109,6 +109,8 @@
             "inherits": "default",
             "cacheVariables": {
                 "ENABLE_FEAT_F4HWN_QRCODE": true,
+                "ENABLE_FEAT_F4HWN_LOGO": true,
+                "ENABLE_FEAT_F4HWN_LOGO_SAV": true,
                 "ENABLE_FEAT_F4HWN_MEM": true,
                 "EDITION_STRING": "Custom",
                 "TARGET": "dikiy_.custom"
