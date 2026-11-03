@@ -917,32 +917,9 @@ static void MAIN_Key_STAR(bool bKeyPressed, bool bKeyHeld)
         return;
     }
     
-    if (!gWasFKeyPressed) // pressed without the F-key
-    {   
-        if (gScanStateDir == SCAN_OFF
-#ifdef ENABLE_FEAT_F4HWN_FULL_WATCH
-            && gEeprom.DUAL_WATCH != DUAL_WATCH_FULL
-#endif
-#ifdef ENABLE_NOAA
-            && !IS_NOAA_CHANNEL(gTxVfo->CHANNEL_SAVE)
-#endif
-#ifdef ENABLE_SCAN_RANGES
-            && gScanRangeStart == 0
-#endif      
-        )
-        {   // start entering a DTMF string
-            memcpy(gDTMF_InputBox, gDTMF_String, MIN(sizeof(gDTMF_InputBox), sizeof(gDTMF_String) - 1));
-            gDTMF_InputBox_Index  = 0;
-            gDTMF_InputMode       = true;
-
-            gKeyInputCountdown    = key_input_timeout_500ms;
-
-            gRequestDisplayScreen = DISPLAY_MAIN;
-        }
-        else
-            gBeepToPlay = BEEP_500HZ_60MS_DOUBLE_BEEP_OPTIONAL;
+    if (!gWasFKeyPressed) { // DTMF keypad input disabled
+        return;
     }
-    else
     {   // with the F-key
         gWasFKeyPressed = false;
 
