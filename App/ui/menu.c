@@ -68,10 +68,6 @@ const t_menu_item MenuList[] =
     {"BusyCL",      MENU_BCL           }, // was "BCL"
     {"Compnd",      MENU_COMPAND       },
     {"Mode",        MENU_AM            }, // was "AM"
-#ifdef ENABLE_FEAT_F4HWN
-    {"TXLock",      MENU_TX_LOCK       }, 
-#endif
-    {"ChList",      MENU_LIST_CH       },
     {"ChSave",      MENU_MEM_CH        }, // was "MEM-CH"
     {"ChDele",      MENU_DEL_CH        }, // was "DEL-CH"
     {"ChName",      MENU_MEM_NAME      },
@@ -115,15 +111,10 @@ const t_menu_item MenuList[] =
 #ifdef ENABLE_DTMF_CALLING
     {"ANI ID",      MENU_ANI_ID        },
 #endif
-    {"UPCode",      MENU_UPCODE        },
-    {"DWCode",      MENU_DWCODE        },
-    {"PTT ID",      MENU_PTT_ID        },
-    {"D ST",        MENU_D_ST          },
 #ifdef ENABLE_DTMF_CALLING
     {"D Resp",      MENU_D_RSP         },
     {"D Hold",      MENU_D_HOLD        },
 #endif
-    {"D Prel",      MENU_D_PRE         },
 #ifdef ENABLE_DTMF_CALLING
     {"D Decd",      MENU_D_DCD         },
     {"D List",      MENU_D_LIST        },
@@ -139,9 +130,6 @@ const t_menu_item MenuList[] =
     {"Sql",         MENU_SQL           },
 #ifdef ENABLE_FEAT_F4HWN
     {"SetPTT",      MENU_SET_PTT       },
-    {"SetTOT",      MENU_SET_TOT       },
-    {"SetEOT",      MENU_SET_EOT       },
-    {"SetCtr",      MENU_SET_CTR       },
  // {"SetInv",      MENU_SET_INV       },
     {"SetLck",      MENU_SET_LCK       },
     {"SetMet",      MENU_SET_MET       },
@@ -175,9 +163,22 @@ const t_menu_item MenuList[] =
     {"SetCfg",      MENU_SET_CFG       }, // load another settings bank
 #endif
 #endif
+    {"Reset",       MENU_RESET         }, // moved here from hidden menu
     // hidden menu items from here on
     // enabled if pressing both the PTT and upper side button at power-on
     {"F Lock",      MENU_F_LOCK        },
+#ifdef ENABLE_FEAT_F4HWN
+    {"TXLock",      MENU_TX_LOCK       }, // moved from visible menu
+#endif
+    {"ChList",      MENU_LIST_CH       }, // moved from visible menu
+    {"UPCode",      MENU_UPCODE        }, // moved from visible menu
+    {"DWCode",      MENU_DWCODE        }, // moved from visible menu
+    {"PTT ID",      MENU_PTT_ID        }, // moved from visible menu
+    {"D ST",        MENU_D_ST          }, // moved from visible menu
+    {"D Prel",      MENU_D_PRE         }, // moved from visible menu
+    {"SetTOT",      MENU_SET_TOT       }, // moved from visible menu
+    {"SetEOT",      MENU_SET_EOT       }, // moved from visible menu
+    {"SetCtr",      MENU_SET_CTR       }, // moved from visible menu
 #ifndef ENABLE_FEAT_F4HWN
     {"Tx 200",      MENU_200TX         }, // was "200TX"
     {"Tx 350",      MENU_350TX         }, // was "350TX"
@@ -193,7 +194,6 @@ const t_menu_item MenuList[] =
     {"BatCal",      MENU_BATCAL        }, // battery voltage calibration
     {"BatTyp",      MENU_BATTYP        }, // battery type 1600/2200mAh
     {"SetNav",      MENU_SET_NAV       }, // set navigation (LEFT / RIGHT or UP / DOWN)
-    {"Reset",       MENU_RESET         }, // might be better to move this to the hidden menu items ?
 
     {"",                              0xff               }  // end of list - DO NOT delete or move this this
 };
@@ -577,7 +577,7 @@ static const uint8_t CatChannels[] = {
 #ifdef ENABLE_FEAT_F4HWN_NARROWER
     MENU_SET_NFM,
 #endif
-    MENU_BCL, MENU_COMPAND, MENU_AM, MENU_TX_LOCK, MENU_PTT_ID, MENU_LIST_CH,
+    MENU_BCL, MENU_COMPAND, MENU_AM,
     MENU_MEM_CH, MENU_DEL_CH, MENU_MEM_NAME,
 #ifdef ENABLE_FEAT_F4HWN_MULTIBOOT
     MENU_SET_CFG,
@@ -605,8 +605,8 @@ static const uint8_t CatPower[]   = {
     MENU_SET_SAV,
 #endif
 };
-static const uint8_t CatDisplay[] = { MENU_MDF, MENU_PONMSG, MENU_ABR, MENU_ABR_MIN, MENU_ABR_MAX, MENU_ABR_ON_TX_RX, MENU_SET_CTR, MENU_SET_INV, MENU_SET_MET, MENU_SET_GUI, MENU_VOL };
-static const uint8_t CatTimers[]  = { MENU_TOT, MENU_SET_TOT, MENU_SET_EOT, MENU_SET_TMR };
+static const uint8_t CatDisplay[] = { MENU_MDF, MENU_PONMSG, MENU_ABR, MENU_ABR_MIN, MENU_ABR_MAX, MENU_ABR_ON_TX_RX, MENU_SET_INV, MENU_SET_MET, MENU_SET_GUI, MENU_VOL };
+static const uint8_t CatTimers[]  = { MENU_TOT, MENU_SET_TMR };
 static const uint8_t CatAudio[]   = {
     MENU_MIC, MENU_MIC_BAR, MENU_BEEP,
 #ifdef ENABLE_FEAT_F4HWN_VOL
@@ -617,7 +617,7 @@ static const uint8_t CatAudio[]   = {
 #endif
 };
 static const uint8_t CatRadio[]   = { MENU_SQL, MENU_STE, MENU_RP_STE, MENU_ROGER, MENU_VOX, MENU_TDR };
-static const uint8_t CatDtmf[]    = { MENU_UPCODE, MENU_DWCODE, MENU_D_ST, MENU_D_PRE, MENU_D_LIVE_DEC };
+static const uint8_t CatDtmf[]    = { MENU_D_LIVE_DEC };
 static const uint8_t CatService[] = { MENU_F_LOCK, MENU_350EN, MENU_BATCAL, MENU_BATTYP, MENU_SET_NAV, MENU_RESET };
 
 typedef struct { const uint8_t *ids; uint8_t len; } cat_list_t;
