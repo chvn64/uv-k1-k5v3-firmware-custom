@@ -164,7 +164,7 @@ void UI_PrintStringSmallBufferBold(const char *pString, uint8_t * buffer)
 
 void UI_DisplayFrequency(const char *string, uint8_t X, uint8_t Y, bool center)
 {
-    const unsigned int char_width  = 13;
+    const unsigned int char_width  = 11;
     uint8_t           *pFb0        = gFrameBuffer[Y] + X;
     uint8_t           *pFb1        = pFb0 + 128;
     bool               bCanDisplay = false;
@@ -178,12 +178,12 @@ void UI_DisplayFrequency(const char *string, uint8_t X, uint8_t Y, bool center)
             bCanDisplay = true;
             if(c>='0' && c<='9' + 1) {
                 memcpy(pFb0 + 2, gFontBigDigits[c-'0'],                  char_width - 3);
-                memcpy(pFb1 + 2, gFontBigDigits[c-'0'] + char_width - 3, char_width - 3);
+                memcpy(pFb1 + 2, gFontBigDigits[c-'0'] + 10, char_width - 3);
             }
             else if(c=='.') {
-                *pFb1 = 0x60; pFb0++; pFb1++;
-                *pFb1 = 0x60; pFb0++; pFb1++;
-                *pFb1 = 0x60; pFb0++; pFb1++;
+                *pFb1 = 0x30; pFb0++; pFb1++;
+                *pFb1 = 0x30; pFb0++; pFb1++;
+                *pFb1 = 0x30; pFb0++; pFb1++;
                 continue;
             }
 
@@ -200,7 +200,7 @@ void UI_DisplayFrequency(const char *string, uint8_t X, uint8_t Y, bool center)
 /*
 void UI_DisplayFrequency(const char *string, uint8_t X, uint8_t Y, bool center)
 {
-    const unsigned int char_width  = 13;
+    const unsigned int char_width  = 11;
     uint8_t           *pFb0        = gFrameBuffer[Y] + X;
     uint8_t           *pFb1        = pFb0 + 128;
     bool               bCanDisplay = false;
